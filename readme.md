@@ -6,22 +6,21 @@ Desenvolver um sistema de gerenciamento para concessionária de carros, que auxi
 2. Problema a Ser Resolvido
 
 Concessionárias de carros frequentemente lidam com grandes volumes de dados relacionados a:
+ 1. Estoque de veículos disponíveis;
 
-Estoque de veículos disponíveis;
+ 2. Vendas realizadas;
 
-Vendas realizadas;
+ 3. Clientes e preferências de compra;
 
-Clientes e preferências de compra;
+ 4. Despesas e receitas mensais.
 
-Despesas e receitas mensais.
+ 5. Atualmente, muitos desses processos são feitos de forma manual ou em planilhas pouco integradas, o que dificulta:
 
-Atualmente, muitos desses processos são feitos de forma manual ou em planilhas pouco integradas, o que dificulta:
+ 6. Acompanhar indicadores de desempenho;
 
-Acompanhar indicadores de desempenho;
+ 7. Tomar decisões rápidas baseadas em dados;
 
-Tomar decisões rápidas baseadas em dados;
-
-Gerar relatórios claros para gestores.
+ 8. Gerar relatórios claros para gestores.
 
 Assim, existe a necessidade de uma ferramenta centralizada e intuitiva para organizar, monitorar e gerar relatórios sobre o funcionamento da concessionária.
 
@@ -29,13 +28,13 @@ Assim, existe a necessidade de uma ferramenta centralizada e intuitiva para orga
 
 Será desenvolvido um sistema web de gerenciamento com foco em:
 
-Cadastro e controle de veículos (estoque).
+1. Cadastro e controle de veículos (estoque).
 
-Registro de vendas realizadas.
+2. Registro de vendas realizadas.
 
-Gestão de clientes.
+3. Gestão de clientes.
 
-Relatórios mensais em forma de gráficos (ex.: vendas por mês, faturamento, veículos mais vendidos).
+4. Relatórios mensais em forma de gráficos (ex.: vendas por mês, faturamento, veículos mais vendidos).
 
 O sistema terá nível de complexidade simples, porém suficiente para contemplar as necessidades básicas de uma concessionária de pequeno a médio porte.
 
@@ -112,7 +111,8 @@ In Progress / Done → tarefas em execução ou concluídas.
 
 Sugestão para TP2 (TODO)
 
-Implementar cadastro de veículos.
+Modelar e gerar o Banco de dados do Software
+Implementar um CRUD de todas as entidades (veículos, clientes, etc)
 
 Implementar cadastro de clientes.
 
