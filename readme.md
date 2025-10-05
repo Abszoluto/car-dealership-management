@@ -112,7 +112,7 @@ In Progress / Done → tarefas em execução ou concluídas.
 TP2 - Projeto de Software
 
 Linguagem e Framework	C# (.NET 8)
-Interface Gráfica (UI)	WPF (Windows Presentation Foundation)
-Banco de Dados Local	SQLite
-ORM / Acesso a Dados	Entity Framework Core
-Planejamento / Sprint	GitHub Projects	Para gerenciar tarefas e acompanhar o progresso do TP3.
+1. Interface Gráfica (UI)	WPF (Windows Presentation Foundation)
+2. Banco de Dados Local	SQLite
+3. ORM / Acesso a Dados	Entity Framework Core
+4. GitHub Projects	Para gerenciar tarefas e acompanhar o progresso do TP3.
