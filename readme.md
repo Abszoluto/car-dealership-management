@@ -109,13 +109,10 @@ TODO → atividades da próxima sprint (TP2).
 
 In Progress / Done → tarefas em execução ou concluídas.
 
-Sugestão para TP2 (TODO)
+TP2 - Projeto de Software
 
-Modelar e gerar o Banco de dados do Software
-Implementar um CRUD de todas as entidades (veículos, clientes, etc)
-
-Implementar cadastro de clientes.
-
-Criar estrutura inicial do banco de dados.
-
-Criar interface básica do sistema (layout inicial).
+Linguagem e Framework	C# (.NET 8)
+Interface Gráfica (UI)	WPF (Windows Presentation Foundation)
+Banco de Dados Local	SQLite
+ORM / Acesso a Dados	Entity Framework Core
+Planejamento / Sprint	GitHub Projects	Para gerenciar tarefas e acompanhar o progresso do TP3.
