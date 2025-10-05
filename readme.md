@@ -109,10 +109,10 @@ TODO → atividades da próxima sprint (TP2).
 
 In Progress / Done → tarefas em execução ou concluídas.
 
-TP2 - Projeto de Software
+* TP2 - Projeto de Software *
 
-Linguagem e Framework	C# (.NET 8)
-1. Interface Gráfica (UI)	WPF (Windows Presentation Foundation)
-2. Banco de Dados Local	SQLite
-3. ORM / Acesso a Dados	Entity Framework Core
-4. GitHub Projects	Para gerenciar tarefas e acompanhar o progresso do TP3.
+1. Linguagem e Framework	C# (.NET 8)
+2. Interface Gráfica (UI)	WPF (Windows Presentation Foundation)
+3. Banco de Dados Local	SQLite
+4. ORM / Acesso a Dados	Entity Framework Core
+5. GitHub Projects	Para gerenciar tarefas e acompanhar o progresso do TP3.
