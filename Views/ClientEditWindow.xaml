@@ -1,0 +1,43 @@
+<Window x:Class="CarDealerApp.Views.ClientEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Adicionar/Editar Cliente" Height="420" Width="400"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Label Content="Tipo de Pessoa"/>
+            <!-- Adicionado x:Name e o evento SelectionChanged -->
+            <ComboBox x:Name="TipoPessoaComboBox"
+                      ItemsSource="{Binding TiposPessoa}"
+                      SelectedValue="{Binding Cliente.TipoPessoa, Mode=TwoWay}"
+                      SelectionChanged="TipoPessoaComboBox_SelectionChanged"/>
+
+            <Label Content="Nome / Razão Social"/>
+            <TextBox Text="{Binding Cliente.NomeRazao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Documento (CPF/CNPJ)"/>
+            <!-- Adicionado x:Name e o evento TextChanged -->
+            <TextBox x:Name="DocumentoTextBox"
+                     Text="{Binding Cliente.Documento, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     TextChanged="DocumentoTextBox_TextChanged" />
+
+            <Label Content="Email"/>
+            <TextBox Text="{Binding Cliente.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Telefone"/>
+            <TextBox x:Name="TelefoneTextBox" 
+                     Text="{Binding Cliente.Telefone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     TextChanged="TelefoneTextBox_TextChanged" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="OK" Width="80" Margin="4" IsDefault="True" Click="Ok_Click"/>
+            <Button Content="Cancelar" Width="80" Margin="4" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

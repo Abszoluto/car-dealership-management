@@ -1,0 +1,25 @@
+<UserControl x:Class="CarDealerApp.Views.ClientsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:CarDealerApp.ViewModels">
+    <UserControl.DataContext>
+        <vm:ClientsViewModel />
+    </UserControl.DataContext>
+    <DockPanel Margin="8">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,8">
+            <Button Content="Novo" Width="80" Margin="4" Command="{Binding AddCommand}" />
+            <Button Content="Editar" Width="80" Margin="4" Command="{Binding EditCommand}" />
+            <Button Content="Excluir" Width="80" Margin="4" Command="{Binding DeleteCommand}" />
+            <Button Content="Refresh" Width="80" Margin="4" Command="{Binding RefreshCommand}" />
+        </StackPanel>
+        <DataGrid ItemsSource="{Binding Clientes}" SelectedItem="{Binding Selected}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding IdCliente}" Width="60" />
+                <DataGridTextColumn Header="Nome/Razão" Binding="{Binding NomeRazao}" Width="200" />
+                <DataGridTextColumn Header="Documento" Binding="{Binding Documento}" Width="150" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200" />
+                <DataGridTextColumn Header="Telefone" Binding="{Binding Telefone}" Width="120" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>
