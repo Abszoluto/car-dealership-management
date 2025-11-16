@@ -97,13 +97,7 @@ Exportar relatório em PDF.
 
 Gerenciar funcionários.
 
-(Sugestão: você pode desenhar o diagrama no LucidChart, Draw.io ou StarUML e exportar como imagem para colocar no repositório, dentro da pasta docs/diagrams.)
 
-6. Planejamento Inicial (GitHub Projects)
-
-No GitHub Projects, o time deve organizar três colunas:
-
-Project Backlog → requisitos funcionais (ex.: “Cadastrar veículos”, “Gerar relatório”).
 
 TODO → atividades da próxima sprint (TP2).
 
