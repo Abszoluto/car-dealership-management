@@ -9,9 +9,9 @@ de decisão.
 ## 2. Problema a Ser Resolvido
 Concessionárias lidam diariamente com um volume significativo de
 informações, como:
-1.  Estoque de veículos disponíveis\
-2.  Vendas realizadas\
-3.  Dados de clientes e suas preferências\
+1.  Estoque de veículos disponíveis
+2.  Vendas realizadas
+3.  Dados de clientes e suas preferências
 4.  Despesas e receitas mensais
 
 Grande parte desses processos ainda é executada de maneira manual ou em
@@ -58,7 +58,7 @@ concessionárias de pequeno e médio porte.
 
 # 5. Diagrama de Caso de Uso
 ## Atores
--   Administrador (Gerente): gerencia funcionários, clientes e veículos\
+-   Administrador (Gerente): gerencia funcionários, clientes e veículos
 -   Funcionário: registra vendas e acessa relatórios
   
 ## Casos de Uso Principais
