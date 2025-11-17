@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load gestao_extras %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="mb-0">Dashboard</h1>
+  {% if request.user|has_group:"Gerente" %}
+    <a href="{% url 'exportar_relatorio_pdf' %}?mes={{ mes_selecionado }}&ano={{ ano_selecionado }}" class="btn btn-outline-danger">
+      <i class="bi bi-file-earmark-pdf me-2"></i>Exportar PDF ({{ nome_mes_selecionado }}/{{ ano_selecionado }})
+    </a>
+  {% endif %}
+</div>
+
+<div class="card shadow mb-4">
+  <div class="card-body">
+    <form method="GET" action="{% url 'dashboard' %}" class="row g-3 align-items-end">
+      <div class="col-md-5">
+        <label for="mes" class="form-label">Mês</label>
+        <select name="mes" id="mes" class="form-select">
+          {% for mes in meses_disponiveis %}
+            <option value="{{ mes.valor }}" {% if mes.valor == mes_selecionado %}selected{% endif %}>
+              {{ mes.nome }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-5">
+        <label for="ano" class="form-label">Ano</label>
+        <select name="ano" id="ano" class="form-select">
+          {% for ano in anos_disponiveis %}
+            <option value="{{ ano }}" {% if ano == ano_selecionado %}selected{% endif %}>
+              {{ ano }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-primary shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs fw-bold text-primary text-uppercase mb-1">Vendas (qtd)</div>
+            <div class="h5 mb-0 fw-bold text-gray-800">{{ vendas_mes_count }}</div>
+          </div>
+          <div class="col-auto"><i class="bi bi-calendar-check fs-2 text-gray-300"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-info shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs fw-bold text-info text-uppercase mb-1">Faturamento</div>
+            <div class="h5 mb-0 fw-bold text-gray-800">R$ {{ faturamento_mes|floatformat:2 }}</div>
+          </div>
+          <div class="col-auto"><i class="bi bi-currency-dollar fs-2 text-gray-300"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-warning shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs fw-bold text-warning text-uppercase mb-1">Custo (investido)</div>
+            <div class="h5 mb-0 fw-bold text-gray-800">R$ {{ custo_mes|floatformat:2 }}</div>
+          </div>
+          <div class="col-auto"><i class="bi bi-box-seam fs-2 text-gray-300"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-success shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs fw-bold text-success text-uppercase mb-1">Lucro líquido</div>
+            <div class="h5 mb-0 fw-bold text-gray-800">R$ {{ lucro_mes|floatformat:2 }}</div>
+          </div>
+          <div class="col-auto"><i class="bi bi-graph-up-arrow fs-2 text-gray-300"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-7 mb-4">
+    <div class="card shadow">
+      <div class="card-header py-3">
+        <h6 class="m-0 fw-bold text-primary">Vendas({{ nome_mes_selecionado }}/{{ ano_selecionado }})</h6>
+      </div>
+      <div class="card-body">
+        <canvas id="vendasDiaChart"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5 mb-4">
+    <div class="card shadow">
+      <div class="card-header py-3">
+        <h6 class="m-0 fw-bold text-primary">Vendas(marca) ({{ nome_mes_selecionado }})</h6>
+      </div>
+      <div class="card-body">
+        <canvas id="marcasChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  //Gráfico de linha
+  const ctxVendasDia = document.getElementById('vendasDiaChart');
+  new Chart(ctxVendasDia, {
+    type: 'line',
+    data: {
+      labels: {{ chart_vendas_dia_labels|safe }},
+      datasets: [{
+        label: 'Nº de Vendas',
+        data: {{ chart_vendas_dia_data|safe }},
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+      }]
+    },
+    options: { responsive: true }
+  });
+  //Gráfico de pizza
+  const ctxMarcas = document.getElementById('marcasChart');
+  new Chart(ctxMarcas, {
+    type: 'doughnut',
+    data: {
+      labels: {{ chart_marcas_labels|safe }},
+      datasets: [{
+        label: 'Nº de Vendas',
+        data: {{ chart_marcas_data|safe }},
+        backgroundColor: [
+          'rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)', 'rgb(153, 102, 255)'
+        ],
+        hoverOffset: 4
+      }]
+    },
+    options: { responsive: true }
+  });
+</script>
+{% endblock %}

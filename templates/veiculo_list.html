@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load gestao_extras %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1><i class="bi bi-car-front me-3"></i>Veículos em estoque</h1>
+  
+  {% if request.user|has_group:"Gerente" %}
+    <a href="{% url 'veiculo_add' %}" class="btn btn-primary">
+      <i class="bi bi-plus-lg me-2"></i>Adicionar veículo
+    </a>
+  {% endif %}
+</div>
+<div class="card mb-4 shadow-sm">
+  <div class="card-body p-2">
+    <form method="GET" class="row g-2">
+      <div class="col-md-11">
+        <input type="text" name="q" class="form-control border-0" placeholder="Buscar por modelo, marca ou documento..." value="{{ request.GET.q }}">
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-outline-primary w-100" type="submit"><i class="bi bi-search"></i></button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="card shadow">
+  <div class="card-body">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th>Foto</th> 
+          <th>Veículo</th>
+          <th>Ano</th>
+          <th>Preço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for veiculo in veiculos %}
+          <tr>
+            <td>
+              {% if veiculo.foto %}
+                <img src="{{ veiculo.foto.url }}" alt="{{ veiculo.modelo }}" class="img-thumbnail" style="width: 100px; height: auto;">
+              {% else %}
+                <span class="text-muted">Sem foto</span>
+              {% endif %}
+            </td>
+            <td>{{ veiculo.marca }} {{ veiculo.modelo }}</td>
+            <td>{{ veiculo.ano }}</td>
+            <td class="fw-bold">R$ {{ veiculo.preco|floatformat:2 }}</td>
+            <td>
+              {% if request.user|has_group:"Gerente" %}
+                <a href="{% url 'veiculo_edit' veiculo.pk %}" class="btn btn-outline-primary btn-sm" title="Editar">
+                  <i class="bi bi-pencil"></i>
+                </a>
+              {% endif %}
+
+              {% if veiculo.status == 'disponivel' %}
+                <a href="{% url 'registrar_venda' %}?veiculo={{ veiculo.pk }}" class="btn btn-outline-success btn-sm" title="Vender este carro">
+                  <i class="bi bi-currency-dollar"></i>
+                </a>
+              {% endif %}
+
+              {% if request.user|has_group:"Gerente" %}
+                <a href="{% url 'veiculo_delete' veiculo.pk %}" class="btn btn-outline-danger btn-sm" title="Excluir">
+                  <i class="bi bi-trash"></i>
+                </a>
+              {% endif %}
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="5" class="text-center py-4">Nenhum veículo encontrado no estoque.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if is_paginated %}
+    <nav class="mt-3">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}&q={{ request.GET.q }}">&laquo;</a></li>
+        {% endif %}
+        <li class="page-item disabled"><span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span></li>
+        {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}&q={{ request.GET.q }}">&raquo;</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

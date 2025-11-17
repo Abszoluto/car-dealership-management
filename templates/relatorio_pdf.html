@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<title>Relatório Financeiro</title>
+<style>
+    @page { 
+        size: A4 landscape; 
+        margin: 1.5cm;
+        @bottom-right {
+            content: "Página " counter(page) " de " counter(pages);
+            font-family: 'Helvetica', sans-serif;
+            font-size: 8pt;
+            color: #777;
+        }
+    }
+    body { font-family: 'Helvetica', sans-serif; color: #333; font-size: 9pt; }
+    .header { border-bottom: 2px solid #2c3e50; padding-bottom: 15px; margin-bottom: 20px; }
+    .header-table { width: 100%; }
+    .company-logo h1 { margin: 0; color: #2c3e50; font-size: 20pt; text-transform: uppercase; }
+    .company-details { text-align: right; font-size: 9pt; color: #555; }
+    .kpi-layout-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 10px 0;
+        margin-bottom: 30px;
+        margin-left: -10px;
+    }
+    .kpi-cell {
+        width: 25%;
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 5px;
+        padding: 15px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .kpi-value { display: block; font-size: 14pt; font-weight: bold; color: #2c3e50; margin-bottom: 5px; }
+    .kpi-label { font-size: 8pt; color: #7f8c8d; text-transform: uppercase; }
+    .bg-warning { background-color: #fff3cd; border-color: #ffeeba; }
+    .text-warning { color: #856404; }
+    .bg-success { background-color: #d4edda; border-color: #c3e6cb; }
+    .text-success { color: #155724; }
+    .bg-info { background-color: #cce5ff; border-color: #b8daff; }
+    .text-info { color: #004085; }
+    .data-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    .data-table th { background-color: #2c3e50; color: #fff; padding: 8px; text-align: left; font-size: 8pt; }
+    .data-table td { padding: 8px; border-bottom: 1px solid #e0e0e0; }
+    .data-table tr:nth-child(even) { background-color: #f8f9fa; }
+    .text-right { text-align: right; }
+    .text-danger { color: #c0392b; font-weight: bold; }
+    .text-bold { font-weight: bold; }
+    .footer-info { margin-top: 30px; border-top: 1px solid #ddd; padding-top: 10px; font-size: 8pt; color: #999; text-align: center; }
+</style>
+</head>
+<body>
+    <div class="header">
+        <table class="header-table">
+            <tr>
+                <td class="company-logo"><h1>Concessionária</h1></td>
+                <td class="company-details">
+                    <strong>Relatório</strong><br>
+                    Período: {{ periodo }}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <table class="kpi-layout-table">
+        <tr>
+            <td class="kpi-cell">
+                <span class="kpi-value">{{ total_vendas }}</span>
+                <span class="kpi-label">Veículos vendiddos</span>
+            </td>
+            <td class="kpi-cell bg-warning">
+                <span class="kpi-value text-warning">R$ {{ custo_total|floatformat:2 }}</span>
+                <span class="kpi-label">Total investido (Custo)</span>
+            </td>
+            <td class="kpi-cell bg-success">
+                <span class="kpi-value text-success">R$ {{ faturamento_total|floatformat:2 }}</span>
+                <span class="kpi-label">Faturamento (Vendas)</span>
+            </td>
+            <td class="kpi-cell bg-info">
+                <span class="kpi-value text-info">R$ {{ lucro_total|floatformat:2 }}</span>
+                <span class="kpi-label">Lucro líquido</span>
+            </td>
+        </tr>
+    </table>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th style="width: 10%;">Data</th>
+                <th style="width: 20%;">Veículo</th>
+                <th style="width: 15%;">Documento</th>
+                <th style="width: 15%;">Cliente</th>
+                <th class="text-right" style="width: 13%;">Custo (R$)</th>
+                <th class="text-right" style="width: 13%;">Venda (R$)</th>
+                <th class="text-right" style="width: 14%;">Lucro</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venda in vendas %}
+            <tr>
+                <td>{{ venda.data_venda|date:"d/m/Y" }}</td>
+                <td>
+                    <strong>{{ venda.veiculo.modelo }}</strong><br>
+                    <span style="color: #666; font-size: 8pt;">{{ venda.veiculo.marca }}/{{ venda.veiculo.ano }}</span>
+                </td>
+                <td>{{ venda.veiculo.numero_documento|default:"-" }}</td>
+                <td>{{ venda.cliente.nome }}</td>
+                <td class="text-right">
+                    {{ venda.veiculo.valor_compra|floatformat:2 }}
+                </td>
+                <td class="text-right">
+                    {{ venda.preco_final|floatformat:2 }}
+                </td>
+                <td class="text-right text-success text-bold">
+                    R$ {{ venda.preco_final|add:venda.veiculo.valor_compra|stringformat:"f"|add:"-0"|floatformat:2 }}
+                </td>
+            </tr>
+            {% endfor %}     
+            <tr style="background-color: #e9ecef; font-weight: bold; border-top: 2px solid #2c3e50;">
+                <td colspan="4" class="text-right">TOTAIS DO PERÍODO</td>
+                <td class="text-right text-danger">R$ {{ custo_total|floatformat:2 }}</td>
+                <td class="text-right text-success">R$ {{ faturamento_total|floatformat:2 }}</td>
+                <td class="text-right text-info">R$ {{ lucro_total|floatformat:2 }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="footer-info">
+        Relatório gerado em: {{ data_geracao|date:"d/m/Y H:i" }} por {{ usuario_gerador.username }}
+    </div>
+</body>
+</html>

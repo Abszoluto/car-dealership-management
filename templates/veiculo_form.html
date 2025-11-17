@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card shadow">
+      <div class="card-header py-3">
+        <h4 class="m-0 fw-bold text-primary">
+          {% if object %}
+            <i class="bi bi-pencil me-3"></i>Editar Veículo
+          {% else %}
+            <i class="bi bi-car-front-fill me-3"></i>Adicionar Veículo
+          {% endif %}
+        </h4>
+      </div>
+      <div class="card-body">  
+        {% if object.foto %}
+          <div class="mb-3 text-center">
+            <img src="{{ object.foto.url }}" alt="{{ object.modelo }}" class="img-fluid rounded" style="max-height: 200px;">
+          </div>
+        {% endif %}
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-primary">Salvar</button>
+          <a href="{% url 'veiculo_list' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
