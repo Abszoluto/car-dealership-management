@@ -1,83 +1,101 @@
-TP1 - Definição do Problema e Planejamento Inicial
-1. Objetivo do Trabalho
+# TP1 -- Definição do Problema e Planejamento Inicial
 
-Desenvolver um sistema de gerenciamento para concessionária de carros, que auxilie no controle de vendas, estoque e clientes, além de gerar relatórios mensais em formato de gráficos para apoiar a tomada de decisão.
+## 1. Objetivo do Trabalho
+Desenvolver um sistema de gerenciamento para concessionária de carros,
+voltado para o controle de vendas, estoque e clientes. O sistema também
+deve gerar relatórios mensais em formato de gráficos, apoiando a tomada
+de decisão.
 
-2. Problema a Ser Resolvido
-Concessionárias de carros frequentemente lidam com grandes volumes de dados relacionados a:
- 1. Estoque de veículos disponíveis
- 2. Vendas realizadas;
- 3. Clientes e preferências de compra;
- 4. Despesas e receitas mensais.
- 5. Atualmente, muitos desses processos são feitos de forma manual ou em planilhas pouco integradas, o que dificulta:
- 6. Acompanhar indicadores de desempenho;
- 7. Tomar decisões rápidas baseadas em dados;
- 8. Gerar relatórios claros para gestores.
+## 2. Problema a Ser Resolvido
+Concessionárias lidam diariamente com um volume significativo de
+informações, como:
+1.  Estoque de veículos disponíveis\
+2.  Vendas realizadas\
+3.  Dados de clientes e suas preferências\
+4.  Despesas e receitas mensais
 
-Assim, existe a necessidade de uma ferramenta centralizada e intuitiva para organizar, monitorar e gerar relatórios sobre o funcionamento da concessionária.
+Grande parte desses processos ainda é executada de maneira manual ou em
+planilhas isoladas, o que dificulta:
+-   Acompanhar indicadores de desempenho
+-   Tomar decisões baseadas em dados
+-   Gerar relatórios consistentes para gestores
 
-3. Tipo de Solução
-Será desenvolvido um sistema web de gerenciamento com foco em:
-1. Cadastro e controle de veículos (estoque).
-2. Registro de vendas realizadas.
-3. Gestão de clientes.
-4. Relatórios mensais em forma de gráficos (ex.: vendas por mês, faturamento, veículos mais vendidos).
+Nesse cenário, torna-se necessária uma ferramenta centralizada, organizada e simples de operar, reunindo e processando essas informações de forma eficiente.
 
-O sistema terá nível de complexidade simples, porém suficiente para contemplar as necessidades básicas de uma concessionária de pequeno a médio porte.
+## 3. Tipo de Solução
 
-4. ** Requisitos **
-4.1 Requisitos funcionais
-O sistema deve permitir o cadastro, edição e exclusão de veículos.
-O sistema deve permitir o cadastro, edição e exclusão de clientes.
-O sistema deve registrar vendas realizadas (vinculando cliente e veículo).
-O sistema deve gerar relatórios mensais de vendas.
-O sistema deve apresentar os relatórios em gráficos visuais (ex.: barras, pizza, linha).
-O sistema deve permitir o cadastro de funcionários que utilizam a aplicação.
-O sistema deve permitir a consulta de histórico de vendas.
-O sistema deve permitir exportação de relatórios em PDF.
+Será desenvolvido um sistema web que permita:
+1.  Cadastro e controle de veículos
+2.  Registro de vendas
+3.  Gestão de clientes
+4.  Relatórios mensais em formato gráfico (ex.: vendas por mês,
+    faturamento, modelos mais vendidos)
 
-4.2 Requisitos não funcionais
-O sistema deve ser desenvolvido em arquitetura web (frontend + backend).
-O sistema deve ter interface intuitiva e responsiva.
-O sistema deve armazenar dados em um banco de dados relacional.
-O sistema deve gerar gráficos de forma rápida, com tempo de resposta inferior a 3 segundos.
-O sistema deve ter controle de acesso com autenticação de usuários.
-O sistema deve ter disponibilidade mínima de 95%.
-O sistema deve ser modular, facilitando manutenção e evolução futura.
+O sistema terá nível de complexidade simples, adequado para
+concessionárias de pequeno e médio porte.
 
-5. Diagrama de Caso de Uso
+------------------------------------------------------------------------
 
-** Atores **
-Administrador (Gerente): gerencia funcionários, clientes e veículos.
-Funcionário: registra vendas e acessa relatórios.
+# 4. Requisitos
+## 4.1 Requisitos Funcionais
+-   Cadastro, edição e exclusão de veículos
+-   Cadastro, edição e exclusão de clientes
+-   Registro de vendas associando cliente e veículo
+-   Geração de relatórios mensais de vendas
+-   Visualização dos relatórios em gráficos
+-   Cadastro de funcionários
+-   Consulta de histórico de vendas
+-   Exportação de relatórios em PDF
+## 4.2 Requisitos Não Funcionais
+-   Arquitetura web (frontend + backend)
+-   Interface intuitiva e responsiva
+-   Banco de dados relacional
+-   Geração de gráficos com tempo de resposta rápido
+-   Autenticação de usuários
+-   Estrutura modular para manutenção futura
 
-** Casos de uso principais **
-1. Cadastrar veículo.
-2. Cadastrar cliente.
-3. Registrar venda.
-4. Gerar relatório mensal.
-5. Visualizar gráficos de desempenho.
-6. Exportar relatório em PDF.
-7. Gerenciar funcionários.
+------------------------------------------------------------------------
 
-* TP2 - Projeto de Software
-1. **Linguagem:** Python 3
-2. **Framework:** Django 5
-3. **Frontend:** HTML5, CSS3 (Bootstrap 5), JavaScript
-4. **Banco de Dados:** SQLite
-5. **GitHub Projects	Para gerenciar tarefas e acompanhar o progresso do TP3.**
+# 5. Diagrama de Caso de Uso
+## Atores
+-   Administrador (Gerente): gerencia funcionários, clientes e veículos\
+-   Funcionário: registra vendas e acessa relatórios
+  
+## Casos de Uso Principais
+1.  Cadastrar veículo
+2.  Cadastrar cliente
+3.  Registrar venda
+4.  Gerar relatório mensal
+5.  Visualizar gráficos de desempenho
+6.  Exportar relatório em PDF
+7.  Gerenciar funcionários
 
-* Como usar:
-1. ** Execute o comando abaixo para instalar todas as dependências **
-pip install -r requirements.txt
+------------------------------------------------------------------------
 
-2. ** Execute as migrações para criar a estrutura do banco de dados SQLite **
-python manage.py makemigrations
-python manage.py migrate
+# TP2 -- Projeto de Software
+-   Linguagem: Python 3
+-   Framework: Django 5
+-   Frontend: HTML5, CSS3 (Bootstrap 5), JavaScript
+-   Banco de Dados: SQLite
+-   Gerenciamento de tarefas: GitHub Projects
 
-3. ** Inicie o servidor local: python manage.py runserver **
+------------------------------------------------------------------------
 
-4. ** Acessar o sistema **
-Acesse http://127.0.0.1:8000/ no navegador
+# Como Usar
 
-OBS: O sistema utiliza um sistema de credencial que será necessário criar uma para acessá-lo
+## 1. Instalar dependências
+    pip install -r requirements.txt
+
+## 2. Criar a estrutura do banco de dados
+    python manage.py makemigrations
+    python manage.py migrate
+
+## 3. Iniciar o servidor local
+    python manage.py runserver
+
+## 4. Acessar o sistema
+Abra no navegador:\
+http://127.0.0.1:8000/
+
+Observação: será necessário criar um usuário para acessar o sistema,
+pois há autenticação configurada.
